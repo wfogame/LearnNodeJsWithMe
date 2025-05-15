@@ -92,4 +92,9 @@ server.listen(3000,()=>{
 
 
 })
+/**On bottom left corner, press liveshare, then click open session chat */
+/* hello??  */
 
+// open sessiom chat
+// where
+// On bottom left corner press liveshare. then on the center, near the top, press open session chat.
