@@ -12,6 +12,7 @@
     <textarea id="codeInput" placeholder="Type your code here"></textarea>    
     <button onclick="WriteCode()">Submit Code</button>
 
+    
     <script>
      
 
@@ -21,7 +22,7 @@
             let WriteData = document.querySelector('#codeInput').value;
 
             // Send a POST request using fetch
-            fetch('http://localhost:3000', { // Ensure the server is running on this URL
+            fetch('/server.js', { // Ensure the server is running on this URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'text/html' // Specify the content type

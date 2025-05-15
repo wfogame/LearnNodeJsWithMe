@@ -1,6 +1,43 @@
 const  http = require('http');
 const fs = require('fs');
 const server = http.createServer((req,res)=>{
+    
+const authHeader = req.headers.authorization;
+  
+  if (!authHeader) {
+    // Trigger browser login prompt
+    res.writeHead(401, {
+      'WWW-Authenticate': 'Basic realm="NOTE if u fail the whole server going to crash lmao", charset="UTF-8"'
+    });
+
+
+        return res.end('Authentication required');
+
+ 
+  }
+
+
+
+ fs.readFile('config.json',(err,data)=>{
+            if(err){
+
+
+                return;
+            }
+
+// Inside your auth check block
+const base64Credentials = authHeader.split(' ')[1]; // "bWFpbjpwYXNz"
+const credentials = Buffer.from(base64Credentials, 'base64').toString('utf-8');
+const [username, password] = credentials.split(':');
+const config = JSON.parse(data.toString());
+
+if (username !== config.username || password !== config.password) {
+    res.writeHead(403);
+    return res.end('Invalid credentials');
+}
+
+    })
+
 
 if(req.method === 'POST'){
     req.on('data', data =>{
