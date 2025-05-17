@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Program</title>
+</head>
+<body>
+    <input type="file" id="ReadFile">
+
+    <script>
+        const fileInput = document.getElementById('ReadFile');
+
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                alert(e.target.result); // Shows the file content as text
+            };
+            reader.readAsText(file); // Or use readAsDataURL(file) for base64
+        });
+    </script>
+</body>
+</html>

@@ -11,8 +11,34 @@ const server = http.createServer((req,res)=>{
         return res.end('You need authentication');
     }
 
+    if(req.method === 'POST'){
+
+
+        return;
+    }
+
+    fs.readFile('index.html',(err,data)=>{
+        
+        res.statusCode = 200;
+        res.setHeader('Content-Type','text/html');
+        res.end(data);
 
 
 
+
+    })
+
+
+
+
+
+})
+
+
+server.listen(3000,'127.0.0.1',()=>{
+
+
+    console.log('Listening on port 3000');
+    
 
 })
