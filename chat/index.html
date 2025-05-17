@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+  <link rel = 'stylesheet' href = 'style.css'>
+</head>
+<body>
+    <h1><img src="logo.png" alt="Logo" style="height:1em;vertical-align:middle;"> Chat</h1>
+    <div id="chat-container">
+        <ul id="messages"></ul>
+        <div id="send-area">
+            <input type="text" id="chat" placeholder="Type your message...">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+    <script>
+        // Basic Auth credentials
+        const username = prompt('Username:','Enter or you must enter ur data every time u chat again');
+        const password = prompt('Password:');
+        const authHeader = "Basic " + btoa(username + ":" + password);
+
+        // Fetch and display chat messages
+        function loadMessages() {
+            fetch("/", {
+                method: "GET",
+                headers: {
+                    "writechat": "1",
+                    "Authorization": authHeader
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const messages = data.chatMessages || [];
+                const ul = document.getElementById('messages');
+                ul.innerHTML = "";
+                 messages.forEach(msg => {
+                    const li = document.createElement('li');
+                    // Create a span for the username
+                    const userSpan = document.createElement('span');
+                    userSpan.textContent = msg.user ? msg.user : "Unknown";
+                    userSpan.className = "username" + (msg.user === username ? " own-user" : " other-user");
+                    
+                    // Create a span for the message
+                    const msgSpan = document.createElement('span');
+                    msgSpan.textContent = msg.message || JSON.stringify(msg);
+                    msgSpan.className = "message-text";
+
+                    li.appendChild(userSpan);
+                    li.appendChild(document.createTextNode(": "));
+                    li.appendChild(msgSpan);
+
+                    if (msg.user && msg.user === username) {
+                        li.classList.add('own');
+                    }
+                    ul.appendChild(li);
+                });
+
+                ul.scrollTop = ul.scrollHeight;
+            });
+        }
+
+        // Send a new chat message
+        document.getElementById('sendBtn').onclick = function() {
+            const chatInput = document.getElementById('chat');
+            const message = chatInput.value.trim();
+            if (!message) return;
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": authHeader
+                },
+                body: JSON.stringify({ user: username, message })
+            })
+            .then(res => res.json())
+            .then(() => {
+                chatInput.value = "";
+                loadMessages();
+            });
+        };
+
+        // Allow sending message with Enter key
+        document.getElementById('chat').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('sendBtn').click();
+            }
+        });
+
+        // Initial load
+        setInterval(()=>{
+        loadMessages();
+
+
+
+        },200)
+    </script>
+</body>
+</html>

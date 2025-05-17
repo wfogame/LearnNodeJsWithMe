@@ -1,8 +1,78 @@
 {
-
-    "users":[],
-    "chatMessages":[]
-
-
-
+  "users": [
+    {
+      "username": "main",
+      "password": "main"
+    },
+    {
+      "username": "alt",
+      "password": "alt"
+    }
+  ],
+  "chatMessages": [
+    {
+      "user": "alt",
+      "message": "wtf"
+    },
+    {
+      "user": "alt",
+      "message": "ucan'tscrollupp"
+    },
+    {
+      "user": "alt",
+      "message": "wtf"
+    },
+    {
+      "user": "alt",
+      "message": "sdsd"
+    },
+    {
+      "user": "main",
+      "message": "yeahiknow他hi四十艘weirdsdsdsdsdsdsds"
+    },
+    {
+      "user": "main",
+      "message": "sd"
+    },
+    {
+      "user": "main",
+      "message": "s"
+    },
+    {
+      "user": "main",
+      "message": "s"
+    },
+    {
+      "user": "main",
+      "message": "s"
+    },
+    {
+      "user": "main",
+      "message": "s"
+    },
+    {
+      "user": "main",
+      "message": "是"
+    },
+    {
+      "user": "main",
+      "message": "是个"
+    },
+    {
+      "user": "main",
+      "message": "是个"
+    },
+    {
+      "user": "main",
+      "message": "说"
+    },
+    {
+      "user": "main",
+      "message": "2"
+    },
+    {
+      "user": "main",
+      "message": "2"
+    }
+  ]
 }
