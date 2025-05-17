@@ -17,9 +17,9 @@
 
             const reader = new FileReader();
             reader.onload = function(e) {
-                alert(e.target.result); // Shows the file content as text
+                console.log(e.target.result); // Shows the file content as text
             };
-            reader.readAsText(file); // Or use readAsDataURL(file) for base64
+            reader.readAsDataURL(file); // Or use readAsDataURL(file) for base64
         });
     </script>
 </body>
